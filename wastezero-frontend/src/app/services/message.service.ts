@@ -2,11 +2,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class MessageService {
 
-  private apiUrl = 'http://localhost:5000/api/messages';
+  private apiUrl = `${environment.apiUrl}/messages`;
   private socket!: Socket;
   private messageSubject = new Subject<any>();
   message$ = this.messageSubject.asObservable();
@@ -16,7 +17,7 @@ export class MessageService {
   }
 
   private connectSocket(): void {
-    this.socket = io('http://localhost:5000', {
+    this.socket = io(environment.socketUrl, {
       transports: ['websocket', 'polling']
     });
 

@@ -1,144 +1,194 @@
-<div class="flex items-center justify-center min-h-screen bg-[#0a0f0a] px-4 py-12 relative overflow-hidden">
+<div class="min-h-screen bg-[#070b07] text-white flex items-center justify-center p-4 md:p-8 relative overflow-hidden font-sans">
 
-  <!-- background glow -->
+  <!-- Background Orbs -->
   <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-    <div class="w-[500px] h-[500px] bg-green-700/15 rounded-full blur-3xl"></div>
+    <div class="w-[800px] h-[500px] bg-emerald-600/10 rounded-full blur-[140px]"></div>
   </div>
 
-  <div class="relative z-10 w-full max-w-md">
+  <div class="relative z-10 w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 rounded-3xl bg-[#09130a] border border-emerald-800/40 shadow-2xl overflow-hidden backdrop-blur-xl">
 
-    <!-- Card -->
-    <div class="bg-white/[0.03] border border-green-900/30 rounded-3xl p-10 w-full backdrop-blur-sm">
-
-      <!-- Logo -->
-      <div class="flex items-center justify-center gap-2 mb-2">
-        <span class="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse"></span>
-        <h2 class="text-2xl font-bold text-green-300 tracking-tight">Create Account</h2>
+    <!-- Left Side: Video Preview Showcase Column (5 Cols) -->
+    <div class="lg:col-span-5 bg-gradient-to-br from-emerald-950 via-[#070b07] to-teal-950 p-8 flex flex-col justify-between relative border-b lg:border-b-0 lg:border-r border-emerald-900/40 overflow-hidden">
+      
+      <!-- Video Container -->
+      <div class="absolute inset-0 opacity-40 pointer-events-none overflow-hidden">
+        <video 
+          src="/assets/videos/zerowaste_showcase_full.mp4" 
+          autoplay 
+          loop 
+          muted 
+          playsinline 
+          class="w-full h-full object-cover">
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#070b07] via-[#070b07]/60 to-transparent"></div>
       </div>
 
-      <p class="text-center text-green-700 text-sm mb-10">
-        Join WasteZero & Start Recycling Smartly
-      </p>
-
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
-
-        <!-- Name -->
-        <div>
-          <label class="block text-xs font-medium text-green-500 uppercase tracking-widest mb-2">
-            Full Name
-          </label>
-          <input
-            type="text"
-            formControlName="name"
-            placeholder="Enter your full name"
-            class="w-full px-4 py-3 bg-white/[0.04] border border-green-900/40 rounded-xl text-green-100 placeholder-green-800 focus:outline-none focus:border-green-600 focus:bg-white/[0.06] transition-all text-sm"
-          />
-        </div>
-
-        <!-- Email -->
-        <div>
-          <label class="block text-xs font-medium text-green-500 uppercase tracking-widest mb-2">
-            Email
-          </label>
-          <input
-            type="email"
-            formControlName="email"
-            placeholder="Enter your email"
-            class="w-full px-4 py-3 bg-white/[0.04] border border-green-900/40 rounded-xl text-green-100 placeholder-green-800 focus:outline-none focus:border-green-600 focus:bg-white/[0.06] transition-all text-sm"
-          />
-        </div>
-
-        <!-- Password -->
-        <div>
-          <label class="block text-xs font-medium text-green-500 uppercase tracking-widest mb-2">
-            Password
-          </label>
-          <input
-            type="password"
-            formControlName="password"
-            placeholder="Minimum 6 characters"
-            class="w-full px-4 py-3 bg-white/[0.04] border border-green-900/40 rounded-xl text-green-100 placeholder-green-800 focus:outline-none focus:border-green-600 focus:bg-white/[0.06] transition-all text-sm"
-          />
-        </div>
-
-        <!-- Confirm Password -->
-        <div>
-          <label class="block text-xs font-medium text-green-500 uppercase tracking-widest mb-2">
-            Confirm Password
-          </label>
-          <input
-            type="password"
-            formControlName="confirmPassword"
-            placeholder="Re-enter your password"
-            class="w-full px-4 py-3 bg-white/[0.04] border border-green-900/40 rounded-xl text-green-100 placeholder-green-800 focus:outline-none focus:border-green-600 focus:bg-white/[0.06] transition-all text-sm"
-          />
-        </div>
-
-        <!-- Role -->
-        <div>
-          <label class="block text-xs font-medium text-green-500 uppercase tracking-widest mb-2">
-            Role
-          </label>
-          <select
-            formControlName="role"
-            class="w-full px-4 py-3 bg-[#0a0f0a] border border-green-900/40 rounded-xl text-green-300 focus:outline-none focus:border-green-600 transition-all text-sm appearance-none cursor-pointer">
-            <option value="" class="bg-[#0a0f0a] text-green-700">Select your role</option>
-            <option value="user" class="bg-[#0a0f0a] text-green-300">User (Citizen)</option>
-            <option value="volunteer" class="bg-[#0a0f0a] text-green-300">Volunteer (Pickup Agent)</option>
-            <option value="admin" class="bg-[#0a0f0a] text-green-300">Admin</option>
-          </select>
-        </div>
-
-        <!-- Location -->
-        <div>
-          <label class="block text-xs font-medium text-green-500 uppercase tracking-widest mb-2">
-            Location
-          </label>
-          <input
-            type="text"
-            formControlName="location"
-            placeholder="Your city or area"
-            class="w-full px-4 py-3 bg-white/[0.04] border border-green-900/40 rounded-xl text-green-100 placeholder-green-800 focus:outline-none focus:border-green-600 focus:bg-white/[0.06] transition-all text-sm"
-          />
-        </div>
-
-        <!-- Error -->
-        <div *ngIf="errorMessage"
-             class="bg-red-900/20 border border-red-800/40 text-red-400 text-sm p-3 rounded-xl text-center">
-          {{ errorMessage }}
-        </div>
-
-        <!-- Submit -->
-        <button
-          type="submit"
-          [disabled]="isLoading"
-          class="w-full bg-green-700 text-green-50 py-3 rounded-xl font-semibold hover:bg-green-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed mt-2 text-sm tracking-wide">
-          {{ isLoading ? 'Creating Account...' : 'Create Account' }}
-        </button>
-
-      </form>
-
-      <!-- Divider -->
-      <div class="flex items-center gap-3 my-7">
-        <div class="flex-1 h-px bg-green-900/40"></div>
-        <span class="text-green-800 text-xs">or</span>
-        <div class="flex-1 h-px bg-green-900/40"></div>
-      </div>
-
-      <!-- Login Link -->
-      <p class="text-center text-sm text-green-700">
-        Already have an account?
-        <a routerLink="/login" class="text-green-400 font-semibold hover:text-green-300 transition ml-1">
-          Login
+      <div class="relative z-10">
+        <a routerLink="/" class="flex items-center gap-2.5 no-underline mb-8 group">
+          <div class="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center">
+            <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse"></span>
+          </div>
+          <span class="text-xl font-black text-white tracking-tight group-hover:text-emerald-300 transition-colors">
+            WasteZero
+          </span>
         </a>
-      </p>
+
+        <span class="px-3 py-1 rounded-full bg-emerald-900/60 border border-emerald-700/40 text-emerald-300 text-[11px] font-bold uppercase tracking-wider inline-block mb-4">
+          🌱 Join the Movement
+        </span>
+
+        <h2 class="text-3xl font-black text-white leading-tight tracking-tight mb-4">
+          Start Your Green Journey Today
+        </h2>
+        <p class="text-emerald-200/70 text-xs leading-relaxed">
+          Create your account as a Citizen, Volunteer Agent, or Platform Administrator and transform waste management in your city.
+        </p>
+      </div>
+
+      <div class="relative z-10 mt-12 space-y-3">
+        <div class="p-3.5 rounded-2xl bg-black/50 border border-emerald-800/40 backdrop-blur-md flex items-center gap-3">
+          <span class="text-2xl">⚡</span>
+          <div>
+            <p class="text-white text-xs font-bold">Instant Account Activation</p>
+            <p class="text-emerald-400/80 text-[11px]">Free access to pickup scheduling & video guides</p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between text-[11px] text-emerald-400/60 pt-2 border-t border-emerald-900/30">
+          <span>Role-Based Portals</span>
+          <span>Verified Security</span>
+        </div>
+      </div>
 
     </div>
 
-    <!-- bottom label -->
-    <p class="text-center text-green-900 text-xs mt-6">
-      © 2025 WasteZero. All rights reserved.
-    </p>
+    <!-- Right Side: Register Form Column (7 Cols) -->
+    <div class="lg:col-span-7 p-8 sm:p-10 flex flex-col justify-center max-h-[90vh] overflow-y-auto">
+
+      <div class="max-w-md mx-auto w-full">
+
+        <h3 class="text-2xl font-black text-white tracking-tight mb-1">
+          Create Free Account
+        </h3>
+        <p class="text-emerald-300/60 text-xs mb-6">
+          Fill in your details to get started with WasteZero.
+        </p>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-3.5">
+
+          <!-- Name -->
+          <div>
+            <label class="block text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1.5">
+              Full Name
+            </label>
+            <input
+              type="text"
+              formControlName="name"
+              placeholder="e.g. Alex Morgan"
+              class="w-full px-4 py-2.5 bg-[#070b07] border border-emerald-900/60 rounded-xl text-white placeholder-emerald-800 focus:outline-none focus:border-emerald-500 transition-all text-xs font-medium"
+            />
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label class="block text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1.5">
+              Email Address
+            </label>
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="alex@example.com"
+              class="w-full px-4 py-2.5 bg-[#070b07] border border-emerald-900/60 rounded-xl text-white placeholder-emerald-800 focus:outline-none focus:border-emerald-500 transition-all text-xs font-medium"
+            />
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <!-- Password -->
+            <div>
+              <label class="block text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1.5">
+                Password
+              </label>
+              <input
+                type="password"
+                formControlName="password"
+                placeholder="••••••••"
+                class="w-full px-4 py-2.5 bg-[#070b07] border border-emerald-900/60 rounded-xl text-white placeholder-emerald-800 focus:outline-none focus:border-emerald-500 transition-all text-xs font-medium"
+              />
+            </div>
+
+            <!-- Confirm Password -->
+            <div>
+              <label class="block text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1.5">
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                formControlName="confirmPassword"
+                placeholder="••••••••"
+                class="w-full px-4 py-2.5 bg-[#070b07] border border-emerald-900/60 rounded-xl text-white placeholder-emerald-800 focus:outline-none focus:border-emerald-500 transition-all text-xs font-medium"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <!-- Role -->
+            <div>
+              <label class="block text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1.5">
+                Account Role
+              </label>
+              <select
+                formControlName="role"
+                class="w-full px-4 py-2.5 bg-[#070b07] border border-emerald-900/60 rounded-xl text-emerald-200 focus:outline-none focus:border-emerald-500 transition-all text-xs font-medium appearance-none cursor-pointer">
+                <option value="" class="bg-[#070b07] text-emerald-700">Select Role</option>
+                <option value="user" class="bg-[#070b07] text-emerald-300">User (Citizen)</option>
+                <option value="volunteer" class="bg-[#070b07] text-emerald-300">Volunteer (Agent)</option>
+                <option value="admin" class="bg-[#070b07] text-emerald-300">Admin</option>
+              </select>
+            </div>
+
+            <!-- Location -->
+            <div>
+              <label class="block text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1.5">
+                City / Location
+              </label>
+              <input
+                type="text"
+                formControlName="location"
+                placeholder="e.g. New York, NY"
+                class="w-full px-4 py-2.5 bg-[#070b07] border border-emerald-900/60 rounded-xl text-white placeholder-emerald-800 focus:outline-none focus:border-emerald-500 transition-all text-xs font-medium"
+              />
+            </div>
+          </div>
+
+          <!-- Error Alert -->
+          <div *ngIf="errorMessage"
+               class="bg-red-950/60 border border-red-800/60 text-red-300 text-xs p-3 rounded-xl text-center font-medium">
+            {{ errorMessage }}
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            [disabled]="isLoading"
+            class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white py-3 rounded-xl font-bold transition-all shadow-lg shadow-emerald-900/50 disabled:opacity-50 disabled:cursor-not-allowed text-xs tracking-wide mt-2 cursor-pointer">
+            {{ isLoading ? 'Creating Account...' : 'Complete Registration' }}
+          </button>
+
+        </form>
+
+        <div class="mt-6 pt-4 border-t border-emerald-900/30 text-center">
+          <p class="text-xs text-emerald-300/70">
+            Already registered?
+            <a routerLink="/login" class="text-emerald-400 font-bold hover:text-emerald-300 transition-colors ml-1">
+              Sign In →
+            </a>
+          </p>
+        </div>
+
+      </div>
+
+    </div>
 
   </div>
+
 </div>

@@ -1,94 +1,86 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth-guard';
+import { adminGuard, volunteerGuard, userGuard } from './guards/role-guard';
+
 export const routes: Routes = [
 
-  // { path: '', redirectTo: 'login', pathMatch: 'full' },
+  // PUBLIC
   {
-  path: '',
-  loadComponent: () =>
-    import('./landing/landing').then(m => m.Landing)
-},
-
-  // PUBLIC ROUTES
+    path: '',
+    loadComponent: () => import('./landing/landing').then(m => m.Landing)
+  },
   {
     path: 'login',
-    loadComponent: () =>
-      import('./auth/login/login').then(m => m.Login)
+    loadComponent: () => import('./auth/login/login').then(m => m.Login)
   },
-
   {
     path: 'register',
-    loadComponent: () =>
-      import('./auth/register/register').then(m => m.Register)
+    loadComponent: () => import('./auth/register/register').then(m => m.Register)
   },
 
-  // USER ROUTES (Protected)
+  // USER ROUTES
   {
     path: 'dashboard-user',
-    loadComponent: () =>
-      import('./dashboards/user-dashboard/user-dashboard').then(m => m.UserDashboard),
-    canActivate: [authGuard]
+    loadComponent: () => import('./dashboards/user-dashboard/user-dashboard').then(m => m.UserDashboard),
+    canActivate: [authGuard, userGuard]
   },
-
   {
     path: 'schedule-pickup',
-    loadComponent: () =>
-      import('./user/schedule-pickup/schedule-pickup').then(m => m.SchedulePickup),
-    canActivate: [authGuard]
+    loadComponent: () => import('./user/schedule-pickup/schedule-pickup').then(m => m.SchedulePickup),
+    canActivate: [authGuard, userGuard]
   },
 
-  // VOLUNTEER ROUTES (Protected)
+  // VOLUNTEER ROUTES
   {
     path: 'dashboard-volunteer',
-    loadComponent: () =>
-      import('./dashboards/volunteer-dashboard/volunteer-dashboard').then(m => m.VolunteerDashboard),
-    canActivate: [authGuard]
+    loadComponent: () => import('./dashboards/volunteer-dashboard/volunteer-dashboard').then(m => m.VolunteerDashboard),
+    canActivate: [authGuard, volunteerGuard]
   },
-
   {
     path: 'opportunities',
-    loadComponent: () =>
-      import('./volunteer/opportunities/opportunities').then(m => m.Opportunities),
-    canActivate: [authGuard]
+    loadComponent: () => import('./volunteer/opportunities/opportunities').then(m => m.Opportunities),
+    canActivate: [authGuard, volunteerGuard]
   },
 
-  // ADMIN ROUTES (Protected)
+  // ADMIN ROUTES
   {
     path: 'dashboard-admin',
-    loadComponent: () =>
-      import('./dashboards/admin-dashboard/admin-dashboard').then(m => m.AdminDashboard),
-    canActivate: [authGuard]
+    loadComponent: () => import('./dashboards/admin-dashboard/admin-dashboard').then(m => m.AdminDashboard),
+    canActivate: [authGuard, adminGuard]
   },
-  
-  {
-  path: 'admin/applications',
-  loadComponent: () =>
-    import('./admin/applications/applications').then(m => m.Applications),
-  canActivate: [authGuard]
-},
   {
     path: 'admin',
-    loadComponent: () =>
-      import('./admin/admin-panel/admin-panel').then(m => m.AdminPanel),
-    canActivate: [authGuard]
+    loadComponent: () => import('./admin/admin-panel/admin-panel').then(m => m.AdminPanel),
+    canActivate: [authGuard, adminGuard]
+  },
+  {
+    path: 'admin/applications',
+    loadComponent: () => import('./admin/applications/applications').then(m => m.Applications),
+    canActivate: [authGuard, adminGuard]
+  },
+  {
+    path: 'admin/users',
+    loadComponent: () => import('./admin/user-management/user-management').then(m => m.UserManagement),
+    canActivate: [authGuard, adminGuard]
+  },
+  {
+    path: 'admin/reports',
+    loadComponent: () => import('./admin/reports/reports').then(m => m.Reports),
+    canActivate: [authGuard, adminGuard]
   },
 
-  // COMMON ROUTES (Protected)
+  // COMMON ROUTES
   {
     path: 'messages',
-    loadComponent: () =>
-      import('./messages/messages').then(m => m.Messages),
+    loadComponent: () => import('./messages/messages').then(m => m.Messages),
     canActivate: [authGuard]
   },
-
   {
     path: 'profile',
-    loadComponent: () =>
-      import('./profile/profile').then(m => m.Profile),
+    loadComponent: () => import('./profile/profile').then(m => m.Profile),
     canActivate: [authGuard]
   },
 
   // FALLBACK
   { path: '**', redirectTo: 'login' }
-
 ];

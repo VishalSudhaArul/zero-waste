@@ -1,6 +1,5 @@
 <div class="min-h-screen bg-[#0a0f0a] px-8 py-10 relative overflow-hidden">
 
-  <!-- bg glow -->
   <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-teal-700/[0.07] rounded-full blur-3xl pointer-events-none"></div>
   <div class="absolute bottom-0 left-0 w-80 h-80 bg-green-700/[0.05] rounded-full blur-3xl pointer-events-none"></div>
 
@@ -13,82 +12,121 @@
     </div>
     <div class="flex items-center gap-2 bg-white/[0.03] border border-teal-900/30 rounded-2xl px-5 py-3">
       <span class="w-2 h-2 bg-teal-400 rounded-full animate-pulse"></span>
-      <span class="text-teal-400 text-sm font-medium">{{ openPickups.length + adminOpportunities.length }} Available</span>
+      <span class="text-teal-400 text-sm font-medium">
+        {{ openPickups.length + adminOpportunities.length }} Available
+      </span>
     </div>
+  </div>
+
+  <!-- Profile Tip Banner -->
+  <div *ngIf="showProfileTip"
+       class="relative z-10 mb-6 bg-yellow-900/10 border border-yellow-900/25 rounded-2xl p-4 flex items-start gap-4">
+    <span class="text-2xl flex-shrink-0">💡</span>
+    <div class="flex-1">
+      <p class="text-yellow-300 text-sm font-semibold mb-1">Improve Your Opportunity Matches!</p>
+      <p class="text-yellow-700 text-xs leading-relaxed mb-3">
+        Your profile is missing
+        <span *ngIf="!hasSkills" class="text-yellow-400 font-medium"> skills</span>
+        <span *ngIf="!hasSkills && !hasLocation"> and</span>
+        <span *ngIf="!hasLocation" class="text-yellow-400 font-medium"> location</span>.
+        Add them to get matched with relevant opportunities automatically.
+      </p>
+      <div class="flex gap-4 flex-wrap items-center">
+        <div class="flex items-center gap-2">
+          <span>{{ hasSkills ? '✅' : '❌' }}</span>
+          <span class="text-xs" [ngClass]="hasSkills ? 'text-green-400' : 'text-red-400'">
+            Skills {{ hasSkills ? 'added' : 'missing' }}
+          </span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span>{{ hasLocation ? '✅' : '❌' }}</span>
+          <span class="text-xs" [ngClass]="hasLocation ? 'text-green-400' : 'text-red-400'">
+            Location {{ hasLocation ? 'added' : 'missing' }}
+          </span>
+        </div>
+        <a routerLink="/profile"
+           class="px-3 py-1 bg-yellow-700/40 text-yellow-300 text-xs font-medium rounded-lg hover:bg-yellow-700/60 transition-all no-underline">
+          Update Profile →
+        </a>
+      </div>
+    </div>
+    <button (click)="showProfileTip = false"
+            class="text-yellow-800 hover:text-yellow-600 text-lg flex-shrink-0">✕</button>
   </div>
 
   <!-- TABS -->
   <div class="relative z-10 flex gap-3 mb-8 flex-wrap">
 
-    <button
-      (click)="switchTab('pickups')"
-      class="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium border transition-all"
-      [ngClass]="activeTab === 'pickups'
-        ? 'bg-teal-700 text-green-50 border-teal-700'
-        : 'bg-white/[0.03] text-green-600 border-teal-900/30 hover:bg-teal-900/20 hover:text-teal-300'">
-      <span>🚛</span>
-      Pickup Requests
+    <button (click)="switchTab('pickups')"
+            class="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium border transition-all"
+            [ngClass]="activeTab === 'pickups'
+              ? 'bg-teal-700 text-green-50 border-teal-700'
+              : 'bg-white/[0.03] text-green-600 border-teal-900/30 hover:bg-teal-900/20'">
+      🚛 Pickup Requests
       <span class="px-1.5 py-0.5 rounded-full text-xs"
             [ngClass]="activeTab === 'pickups' ? 'bg-teal-600 text-green-100' : 'bg-teal-900/40 text-teal-500'">
         {{ openPickups.length }}
       </span>
     </button>
 
-    <button
-      (click)="switchTab('opportunities')"
-      class="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium border transition-all"
-      [ngClass]="activeTab === 'opportunities'
-        ? 'bg-green-700 text-green-50 border-green-700'
-        : 'bg-white/[0.03] text-green-600 border-green-900/30 hover:bg-green-900/20 hover:text-green-300'">
-      <span>📋</span>
-      Admin Opportunities
+    <button (click)="switchTab('opportunities')"
+            class="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium border transition-all"
+            [ngClass]="activeTab === 'opportunities'
+              ? 'bg-green-700 text-green-50 border-green-700'
+              : 'bg-white/[0.03] text-green-600 border-green-900/30 hover:bg-green-900/20'">
+      📋 Admin Opportunities
       <span class="px-1.5 py-0.5 rounded-full text-xs"
             [ngClass]="activeTab === 'opportunities' ? 'bg-green-600 text-green-100' : 'bg-green-900/40 text-green-600'">
         {{ adminOpportunities.length }}
       </span>
     </button>
 
-    <button
-      (click)="switchTab('assignments')"
-      class="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium border transition-all"
-      [ngClass]="activeTab === 'assignments'
-        ? 'bg-yellow-700/80 text-green-50 border-yellow-700/80'
-        : 'bg-white/[0.03] text-green-600 border-yellow-900/30 hover:bg-yellow-900/20 hover:text-yellow-300'">
-      <span>📦</span>
-      My Assignments
+    <button (click)="switchTab('matched')"
+            class="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium border transition-all"
+            [ngClass]="activeTab === 'matched'
+              ? 'bg-yellow-700/80 text-green-50 border-yellow-700/80'
+              : 'bg-white/[0.03] text-green-600 border-yellow-900/30 hover:bg-yellow-900/20'">
+      ⭐ Matched For You
       <span class="px-1.5 py-0.5 rounded-full text-xs"
-            [ngClass]="activeTab === 'assignments' ? 'bg-yellow-600/80 text-green-100' : 'bg-yellow-900/30 text-yellow-700'">
+            [ngClass]="activeTab === 'matched' ? 'bg-yellow-600/80 text-green-100' : 'bg-yellow-900/30 text-yellow-700'">
+        {{ matchedOpportunities.length }}
+      </span>
+    </button>
+
+    <button (click)="switchTab('assignments')"
+            class="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium border transition-all"
+            [ngClass]="activeTab === 'assignments'
+              ? 'bg-green-800 text-green-50 border-green-800'
+              : 'bg-white/[0.03] text-green-600 border-green-900/30 hover:bg-green-900/20'">
+      📦 My Assignments
+      <span class="px-1.5 py-0.5 rounded-full text-xs"
+            [ngClass]="activeTab === 'assignments' ? 'bg-green-700 text-green-100' : 'bg-green-900/40 text-green-600'">
         {{ acceptedPickups.length }}
       </span>
     </button>
 
   </div>
 
-  <!-- ══════════════════════════════════════════ -->
-  <!-- TAB 1: PICKUP REQUESTS (Milestone 3)       -->
-  <!-- ══════════════════════════════════════════ -->
+  <!-- TAB 1: PICKUP REQUESTS -->
   <div *ngIf="activeTab === 'pickups'" class="relative z-10">
-
     <div class="flex items-center gap-3 mb-5">
       <p class="text-teal-500 text-xs uppercase tracking-widest font-medium">Open Pickup Requests from Citizens</p>
       <div class="flex-1 h-px bg-teal-900/20"></div>
     </div>
 
-    <!-- Empty -->
     <div *ngIf="openPickups.length === 0"
          class="bg-white/[0.02] border border-teal-900/20 rounded-2xl p-16 text-center">
       <div class="text-4xl mb-3">📭</div>
       <p class="text-green-600 text-sm">No open pickup requests right now.</p>
-      <p class="text-green-800 text-xs mt-1">Check back soon!</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
       <div *ngFor="let pickup of openPickups"
-           class="group bg-white/[0.03] border border-teal-900/25 rounded-2xl p-6 hover:bg-teal-900/10 hover:border-teal-700/35 hover:-translate-y-1 transition-all duration-300">
+           class="group bg-white/[0.03] border border-teal-900/25 rounded-2xl p-6 hover:bg-teal-900/10 hover:-translate-y-1 transition-all duration-300">
 
         <div class="flex items-start justify-between mb-4">
           <div class="flex items-center gap-3">
-            <div class="w-11 h-11 bg-teal-900/40 rounded-xl flex items-center justify-center text-xl group-hover:bg-teal-800/50 transition-all">
+            <div class="w-11 h-11 bg-teal-900/40 rounded-xl flex items-center justify-center text-xl">
               {{ getWasteIcon(pickup.wasteType) }}
             </div>
             <div>
@@ -96,66 +134,45 @@
               <p class="text-green-700 text-xs">{{ pickup.quantity }}</p>
             </div>
           </div>
-          <span class="px-3 py-1 rounded-full bg-yellow-900/20 text-yellow-400 text-xs font-medium border border-yellow-900/30">
-            Open
-          </span>
+          <span class="px-3 py-1 rounded-full bg-yellow-900/20 text-yellow-400 text-xs font-medium border border-yellow-900/30">Open</span>
         </div>
 
         <div class="space-y-2 mb-5">
-          <div class="flex items-center gap-2 text-xs text-green-700">
-            <span>📍</span><span>{{ pickup.address }}</span>
-          </div>
-          <div class="flex items-center gap-2 text-xs text-green-700">
-            <span>📅</span><span>{{ pickup.preferredDate }} at {{ pickup.preferredTime }}</span>
-          </div>
-          <div *ngIf="pickup.user_id" class="flex items-center gap-2 text-xs text-green-700">
-            <span>👤</span><span>{{ pickup.user_id.name }}</span>
-          </div>
-          <div *ngIf="pickup.contactNumber" class="flex items-center gap-2 text-xs text-green-700">
-            <span>📞</span><span>{{ pickup.contactNumber }}</span>
-          </div>
-          <div *ngIf="pickup.description" class="flex items-center gap-2 text-xs text-green-800 italic">
-            <span>💬</span><span>{{ pickup.description }}</span>
-          </div>
+          <div class="flex items-center gap-2 text-xs text-green-700"><span>📍</span><span>{{ pickup.address }}</span></div>
+          <div class="flex items-center gap-2 text-xs text-green-700"><span>📅</span><span>{{ pickup.preferredDate }} at {{ pickup.preferredTime }}</span></div>
+          <div *ngIf="pickup.user_id" class="flex items-center gap-2 text-xs text-green-700"><span>👤</span><span>{{ pickup.user_id.name }}</span></div>
+          <div *ngIf="pickup.contactNumber" class="flex items-center gap-2 text-xs text-green-700"><span>📞</span><span>{{ pickup.contactNumber }}</span></div>
+          <div *ngIf="pickup.description" class="flex items-center gap-2 text-xs text-green-800 italic"><span>💬</span><span>{{ pickup.description }}</span></div>
         </div>
 
-        <button
-          (click)="acceptPickup(pickup._id)"
-          class="w-full py-2.5 bg-teal-700/80 text-green-50 rounded-xl text-sm font-semibold hover:bg-teal-600 transition-all duration-300">
+        <button (click)="acceptPickup(pickup._id)"
+                class="w-full py-2.5 bg-teal-700/80 text-green-50 rounded-xl text-sm font-semibold hover:bg-teal-600 transition-all">
           Accept Pickup →
         </button>
-
       </div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════ -->
-  <!-- TAB 2: ADMIN OPPORTUNITIES (Milestone 2)  -->
-  <!-- ══════════════════════════════════════════ -->
+  <!-- TAB 2: ADMIN OPPORTUNITIES -->
   <div *ngIf="activeTab === 'opportunities'" class="relative z-10">
-
     <div class="flex items-center gap-3 mb-5">
       <p class="text-green-500 text-xs uppercase tracking-widest font-medium">Volunteering Opportunities Posted by Admin</p>
       <div class="flex-1 h-px bg-green-900/20"></div>
     </div>
 
-    <!-- Empty -->
     <div *ngIf="adminOpportunities.length === 0"
          class="bg-white/[0.02] border border-green-900/20 rounded-2xl p-16 text-center">
       <div class="text-4xl mb-3">📋</div>
       <p class="text-green-600 text-sm">No opportunities posted yet.</p>
-      <p class="text-green-800 text-xs mt-1">Admin will post opportunities soon!</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
       <div *ngFor="let opp of adminOpportunities"
-           class="group bg-white/[0.03] border border-green-900/25 rounded-2xl p-6 hover:bg-green-900/10 hover:border-green-700/35 hover:-translate-y-1 transition-all duration-300">
+           class="group bg-white/[0.03] border border-green-900/25 rounded-2xl p-6 hover:bg-green-900/10 hover:-translate-y-1 transition-all duration-300">
 
         <div class="flex items-start justify-between mb-4">
           <div class="flex items-center gap-3">
-            <div class="w-11 h-11 bg-green-900/40 rounded-xl flex items-center justify-center text-xl group-hover:bg-green-800/50 transition-all">
-              🌿
-            </div>
+            <div class="w-11 h-11 bg-green-900/40 rounded-xl flex items-center justify-center text-xl">🌿</div>
             <div>
               <p class="text-green-200 text-base font-semibold">{{ opp.title }}</p>
               <p class="text-green-700 text-xs">{{ opp.duration }}</p>
@@ -174,13 +191,9 @@
         <p class="text-green-600 text-xs leading-relaxed mb-4">{{ opp.description }}</p>
 
         <div class="space-y-2 mb-5">
-          <div class="flex items-center gap-2 text-xs text-green-700">
-            <span>📍</span><span>{{ opp.location }}</span>
-          </div>
-          <div class="flex items-center gap-2 text-xs text-green-700">
-            <span>⏱️</span><span>{{ opp.duration }}</span>
-          </div>
-          <div class="flex flex-wrap gap-1.5 mt-2">
+          <div class="flex items-center gap-2 text-xs text-green-700"><span>📍</span><span>{{ opp.location }}</span></div>
+          <div class="flex items-center gap-2 text-xs text-green-700"><span>⏱️</span><span>{{ opp.duration }}</span></div>
+          <div class="flex flex-wrap gap-1.5">
             <span *ngFor="let skill of opp.requiredSkills"
                   class="px-2.5 py-0.5 bg-green-900/30 text-green-500 text-xs rounded-full border border-green-900/30">
               {{ skill }}
@@ -188,43 +201,115 @@
           </div>
         </div>
 
-        <!-- Already Applied -->
         <div *ngIf="hasApplied(opp._id)"
              class="w-full py-2.5 bg-green-900/20 text-green-500 rounded-xl text-sm font-medium text-center border border-green-900/30">
           ✅ Already Applied
         </div>
-
-        <!-- Apply Button -->
-        <button
-          *ngIf="!hasApplied(opp._id) && opp.status === 'open'"
-          (click)="applyOpportunity(opp._id)"
-          class="w-full py-2.5 bg-green-700 text-green-50 rounded-xl text-sm font-semibold hover:bg-green-600 transition-all duration-300">
+        <button *ngIf="!hasApplied(opp._id) && opp.status === 'open'"
+                (click)="applyOpportunity(opp._id)"
+                class="w-full py-2.5 bg-green-700 text-green-50 rounded-xl text-sm font-semibold hover:bg-green-600 transition-all">
           Apply Now →
         </button>
-
-        <!-- Closed -->
         <div *ngIf="opp.status !== 'open' && !hasApplied(opp._id)"
              class="w-full py-2.5 bg-red-900/20 text-red-400 rounded-xl text-sm font-medium text-center border border-red-900/30">
           🔒 Closed
         </div>
-
       </div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════ -->
-  <!-- TAB 3: MY ASSIGNMENTS                      -->
-  <!-- ══════════════════════════════════════════ -->
-  <div *ngIf="activeTab === 'assignments'" class="relative z-10">
-
+  <!-- TAB 3: MATCHED FOR YOU ← NEW -->
+  <div *ngIf="activeTab === 'matched'" class="relative z-10">
     <div class="flex items-center gap-3 mb-5">
-      <p class="text-yellow-500 text-xs uppercase tracking-widest font-medium">My Accepted Pickup Assignments</p>
+      <p class="text-yellow-500 text-xs uppercase tracking-widest font-medium">Opportunities Matched to Your Profile</p>
       <div class="flex-1 h-px bg-yellow-900/20"></div>
     </div>
 
-    <!-- Empty -->
-    <div *ngIf="acceptedPickups.length === 0"
+    <!-- No profile data -->
+    <div *ngIf="!hasSkills && !hasLocation"
+         class="bg-yellow-900/10 border border-yellow-900/25 rounded-2xl p-10 text-center mb-6">
+      <div class="text-4xl mb-3">🎯</div>
+      <p class="text-yellow-300 text-sm font-semibold mb-2">No Profile Data for Matching</p>
+      <p class="text-yellow-700 text-xs mb-4">Add your skills and location in your profile to get matched.</p>
+      <a routerLink="/profile"
+         class="inline-block px-6 py-2.5 bg-yellow-700/60 text-yellow-200 text-sm font-semibold rounded-xl hover:bg-yellow-700/80 transition-all no-underline">
+        Update Profile Now →
+      </a>
+    </div>
+
+    <!-- No matches -->
+    <div *ngIf="(hasSkills || hasLocation) && matchedOpportunities.length === 0"
          class="bg-white/[0.02] border border-yellow-900/20 rounded-2xl p-16 text-center">
+      <div class="text-4xl mb-3">🔍</div>
+      <p class="text-green-600 text-sm">No matched opportunities found.</p>
+      <p class="text-green-800 text-xs mt-1">Add more skills or check back when new opportunities are posted.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div *ngFor="let opp of matchedOpportunities"
+           class="group rounded-2xl p-6 border hover:-translate-y-1 transition-all duration-300"
+           [ngClass]="getMatchScoreBg(opp.matchScore)">
+
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 bg-yellow-900/30 rounded-xl flex items-center justify-center text-xl">🌿</div>
+            <div>
+              <p class="text-green-200 text-base font-semibold">{{ opp.title }}</p>
+              <p class="text-green-700 text-xs">{{ opp.duration }}</p>
+            </div>
+          </div>
+          <div class="px-3 py-1 rounded-full bg-yellow-900/30 border border-yellow-900/40 text-center">
+            <p class="text-xs font-bold" [ngClass]="getMatchScoreColor(opp.matchScore)">
+              {{ opp.matchScore }} pts
+            </p>
+          </div>
+        </div>
+
+        <p class="text-green-600 text-xs leading-relaxed mb-4">{{ opp.description }}</p>
+
+        <div class="space-y-2 mb-4">
+          <div class="flex items-center gap-2 text-xs text-green-700"><span>📍</span><span>{{ opp.location }}</span></div>
+          <div class="flex items-center gap-2 text-xs text-green-700"><span>⏱️</span><span>{{ opp.duration }}</span></div>
+
+          <!-- Match reasons -->
+          <div *ngIf="opp.matchReasons?.length > 0" class="flex flex-wrap gap-1.5">
+            <span *ngFor="let reason of opp.matchReasons"
+                  class="px-2.5 py-0.5 bg-yellow-900/20 text-yellow-500 text-xs rounded-full border border-yellow-900/30">
+              ✓ {{ reason }}
+            </span>
+          </div>
+
+          <!-- Skills -->
+          <div class="flex flex-wrap gap-1.5">
+            <span *ngFor="let skill of opp.requiredSkills"
+                  class="px-2.5 py-0.5 bg-green-900/20 text-green-600 text-xs rounded-full border border-green-900/20">
+              {{ skill }}
+            </span>
+          </div>
+        </div>
+
+        <div *ngIf="hasApplied(opp._id)"
+             class="w-full py-2.5 bg-green-900/20 text-green-500 rounded-xl text-sm font-medium text-center border border-green-900/30">
+          ✅ Already Applied
+        </div>
+        <button *ngIf="!hasApplied(opp._id) && opp.status === 'open'"
+                (click)="applyOpportunity(opp._id)"
+                class="w-full py-2.5 bg-yellow-700/70 text-green-50 rounded-xl text-sm font-semibold hover:bg-yellow-600/70 transition-all">
+          Apply Now →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: MY ASSIGNMENTS -->
+  <div *ngIf="activeTab === 'assignments'" class="relative z-10">
+    <div class="flex items-center gap-3 mb-5">
+      <p class="text-green-500 text-xs uppercase tracking-widest font-medium">My Accepted Pickup Assignments</p>
+      <div class="flex-1 h-px bg-green-900/20"></div>
+    </div>
+
+    <div *ngIf="acceptedPickups.length === 0"
+         class="bg-white/[0.02] border border-green-900/20 rounded-2xl p-16 text-center">
       <div class="text-4xl mb-3">📦</div>
       <p class="text-green-600 text-sm">No assignments yet.</p>
       <p class="text-green-800 text-xs mt-1">Accept a pickup from the Pickup Requests tab!</p>
@@ -232,7 +317,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
       <div *ngFor="let pickup of acceptedPickups"
-           class="group bg-white/[0.03] border border-yellow-900/20 rounded-2xl p-6 hover:bg-yellow-900/[0.07] transition-all duration-300">
+           class="bg-white/[0.03] border border-yellow-900/20 rounded-2xl p-6 hover:bg-yellow-900/[0.07] transition-all">
 
         <div class="flex items-start justify-between mb-4">
           <div class="flex items-center gap-3">
@@ -254,32 +339,21 @@
         </div>
 
         <div class="space-y-2 mb-5">
-          <div class="flex items-center gap-2 text-xs text-green-700">
-            <span>📍</span><span>{{ pickup.address }}</span>
-          </div>
-          <div class="flex items-center gap-2 text-xs text-green-700">
-            <span>📅</span><span>{{ pickup.preferredDate }} at {{ pickup.preferredTime }}</span>
-          </div>
-          <div *ngIf="pickup.user_id" class="flex items-center gap-2 text-xs text-green-700">
-            <span>👤</span><span>{{ pickup.user_id.name }} — {{ pickup.user_id.email }}</span>
-          </div>
-          <div *ngIf="pickup.contactNumber" class="flex items-center gap-2 text-xs text-green-700">
-            <span>📞</span><span>{{ pickup.contactNumber }}</span>
-          </div>
+          <div class="flex items-center gap-2 text-xs text-green-700"><span>📍</span><span>{{ pickup.address }}</span></div>
+          <div class="flex items-center gap-2 text-xs text-green-700"><span>📅</span><span>{{ pickup.preferredDate }} at {{ pickup.preferredTime }}</span></div>
+          <div *ngIf="pickup.user_id" class="flex items-center gap-2 text-xs text-green-700"><span>👤</span><span>{{ pickup.user_id.name }} — {{ pickup.user_id.email }}</span></div>
+          <div *ngIf="pickup.contactNumber" class="flex items-center gap-2 text-xs text-green-700"><span>📞</span><span>{{ pickup.contactNumber }}</span></div>
         </div>
 
-        <button
-          *ngIf="pickup.status === 'Accepted'"
-          (click)="completePickup(pickup._id)"
-          class="w-full py-2.5 bg-green-700 text-green-50 rounded-xl text-sm font-semibold hover:bg-green-600 transition-all duration-300">
+        <button *ngIf="pickup.status === 'Accepted'"
+                (click)="completePickup(pickup._id)"
+                class="w-full py-2.5 bg-green-700 text-green-50 rounded-xl text-sm font-semibold hover:bg-green-600 transition-all">
           Mark as Completed ✅
         </button>
-
         <div *ngIf="pickup.status === 'Completed'"
              class="w-full py-2.5 bg-green-900/20 text-green-500 rounded-xl text-sm font-medium text-center border border-green-900/30">
           ✅ Completed
         </div>
-
       </div>
     </div>
   </div>

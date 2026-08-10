@@ -1,240 +1,418 @@
-<div class="min-h-screen bg-[#0a0f0a] text-green-50 overflow-x-hidden">
+<div class="min-h-screen bg-[#070b07] text-emerald-50 font-sans overflow-x-hidden relative">
 
-  <!-- NAVBAR -->
-  <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-8 py-4 bg-[#0a0f0a]/80 backdrop-blur-md border-b border-green-900/30">
-    <a routerLink="/" class="flex items-center gap-2 font-bold text-xl text-green-300 no-underline tracking-tight">
-      <span class="w-2.5 h-2.5 bg-green-400 rounded-full inline-block animate-pulse"></span>
-      WasteZero
+  <!-- TOP NAVBAR -->
+  <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 md:px-12 py-4 bg-[#070b07]/85 backdrop-blur-xl border-b border-emerald-900/30 shadow-2xl">
+    <a routerLink="/" class="flex items-center gap-3 font-bold text-xl text-emerald-300 no-underline tracking-tight group">
+      <div class="relative flex items-center justify-center w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-500/40 group-hover:scale-105 transition-all">
+        <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping absolute opacity-75"></span>
+        <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full relative"></span>
+      </div>
+      <span class="bg-gradient-to-r from-emerald-200 via-emerald-400 to-teal-300 bg-clip-text text-transparent font-extrabold text-2xl">
+        WasteZero
+      </span>
     </a>
-    <div class="flex gap-3">
+
+    <div class="flex items-center gap-3">
+      <!-- Quick Demo Video Button -->
+      <button 
+        (click)="openVideoModal(0)"
+        class="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs font-semibold hover:bg-emerald-800/40 hover:border-emerald-400 transition-all hover:scale-105 shadow-lg cursor-pointer">
+        <span class="animate-pulse text-emerald-400 text-sm">▶</span> 
+        <span>Watch 60s Video Showcase</span>
+      </button>
+
       <a routerLink="/login"
-         class="px-5 py-2 rounded-full border border-green-700/50 text-green-300 text-sm font-medium hover:bg-green-900/30 transition-all no-underline">
-        Login
+         class="px-5 py-2 rounded-full border border-emerald-700/50 text-emerald-300 text-sm font-medium hover:bg-emerald-900/40 hover:text-emerald-200 transition-all no-underline">
+        Sign In
       </a>
       <a routerLink="/register"
-         class="px-5 py-2 rounded-full bg-green-700 text-green-50 text-sm font-medium hover:bg-green-800 transition-all no-underline">
-        Register
+         class="px-6 py-2 rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-sm font-semibold hover:from-emerald-500 hover:to-teal-500 transition-all no-underline shadow-lg shadow-emerald-900/40 hover:scale-105">
+        Get Started
       </a>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24 pb-16 relative">
-    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-      <div class="w-96 h-96 bg-green-700/20 rounded-full blur-3xl"></div>
+  <!-- HERO SECTION -->
+  <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-16 relative">
+    
+    <!-- Background Glow Orbs -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+      <div class="w-[700px] h-[500px] bg-emerald-600/15 rounded-full blur-[140px] animate-pulse"></div>
+      <div class="w-[400px] h-[300px] bg-teal-500/10 rounded-full blur-[100px] absolute -top-10"></div>
     </div>
 
-    <span class="relative z-10 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-900/40 border border-green-700/30 text-green-400 text-xs font-medium tracking-widest uppercase mb-8">
-      🌱 Smart Waste Management Platform
-    </span>
+    <!-- Badge -->
+    <div class="relative z-10 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-950/60 border border-emerald-700/40 text-emerald-300 text-xs font-semibold tracking-wider uppercase mb-8 shadow-inner backdrop-blur-md">
+      <span class="flex h-2 w-2 relative">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+      </span>
+      🌱 AI & Community-Driven Waste Management
+    </div>
 
-    <h1 class="relative z-10 text-5xl md:text-7xl font-extrabold text-green-50 leading-tight tracking-tighter mb-6 max-w-3xl">
-      Clean Cities Start<br>
-      With <span class="text-green-400">One Request</span>
+    <!-- Headline -->
+    <h1 class="relative z-10 text-5xl sm:text-6xl md:text-7xl font-black text-white leading-[1.1] tracking-tight mb-8 max-w-4xl">
+      Turn Waste Into Impact<br>
+      With <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-300 bg-clip-text text-transparent">Smart City Pickups</span>
     </h1>
 
-    <p class="relative z-10 text-green-300/70 text-lg font-light max-w-lg mb-10 leading-relaxed">
-      Connect with verified volunteers to schedule waste pickups,
-      track recycling impact, and help build greener communities.
+    <p class="relative z-10 text-emerald-200/80 text-lg md:text-xl font-light max-w-2xl mb-10 leading-relaxed">
+      Schedule automated waste pickups, track verified volunteer dispatch in real-time, 
+      and watch your community's recycling metrics grow.
     </p>
 
-    <div class="relative z-10 flex gap-3 flex-wrap justify-center">
+    <!-- CTA Buttons -->
+    <div class="relative z-10 flex gap-4 flex-wrap justify-center items-center">
       <a routerLink="/register"
-         class="px-8 py-3 rounded-full bg-green-700 text-green-50 text-base font-medium hover:bg-green-800 hover:-translate-y-0.5 transition-all shadow-lg no-underline">
-        Get Started Free
+         class="px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold text-base hover:from-emerald-400 hover:to-teal-500 transition-all duration-300 shadow-xl shadow-emerald-900/40 hover:-translate-y-1 no-underline flex items-center gap-3">
+        <span>Request First Pickup</span>
+        <span class="text-xl">→</span>
       </a>
-      <a routerLink="/login"
-         class="px-8 py-3 rounded-full border border-green-700/40 text-green-300 text-base font-medium hover:bg-green-900/30 hover:-translate-y-0.5 transition-all no-underline">
-        Sign In
-      </a>
+      <button 
+         (click)="openVideoModal(0)"
+         class="px-8 py-4 rounded-2xl bg-emerald-950/70 border border-emerald-700/50 text-emerald-200 font-semibold text-base hover:bg-emerald-900/40 hover:border-emerald-400 hover:-translate-y-1 transition-all duration-300 no-underline backdrop-blur-md flex items-center gap-3 cursor-pointer">
+        <span class="text-emerald-400 text-lg">🎬</span>
+        <span>Watch 60s Showcase</span>
+      </button>
+    </div>
+
+    <!-- Quick Video Highlight Preview Strip -->
+    <div class="relative z-10 mt-16 max-w-5xl w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+      <div *ngFor="let clip of clips.slice(1); let i = index" 
+           (click)="selectClip(i + 1); openVideoModal(i + 1)"
+           class="group relative rounded-2xl p-3 bg-emerald-950/40 border border-emerald-900/40 hover:border-emerald-500/60 hover:bg-emerald-900/30 transition-all cursor-pointer text-left backdrop-blur-sm">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xl">{{ clip.icon }}</span>
+          <span class="text-[10px] uppercase font-bold text-emerald-400 px-2 py-0.5 rounded-full bg-emerald-900/60 border border-emerald-700/40">
+            10s Clip
+          </span>
+        </div>
+        <h4 class="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors line-clamp-1">
+          {{ clip.title.split(': ')[1] || clip.title }}
+        </h4>
+        <p class="text-[11px] text-emerald-400/70 mt-1 line-clamp-1">{{ clip.tag }}</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- INTERACTIVE VIDEO SHOWCASE THEATRE -->
+  <section class="px-6 md:px-12 py-20 bg-gradient-to-b from-[#070b07] via-[#09130a] to-[#070b07] border-t border-b border-emerald-900/30">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="px-4 py-1.5 rounded-full bg-emerald-900/40 border border-emerald-700/30 text-emerald-400 text-xs font-semibold uppercase tracking-widest">
+          🎥 Interactive Video Showcase & Clips
+        </span>
+        <h2 class="text-4xl md:text-5xl font-black text-white tracking-tight mt-4 mb-4">
+          Experience WasteZero in Action
+        </h2>
+        <p class="text-emerald-300/70 text-base leading-relaxed">
+          Watch our seamless <strong class="text-emerald-300">60-second merged trailer</strong> or explore individual 
+          <strong class="text-emerald-300">10-second feature clips</strong> demonstrating the platform workflow.
+        </p>
+      </div>
+
+      <!-- Main Showcase Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+        <!-- Left: Custom High-Def Video Player (7 Cols) -->
+        <div class="lg:col-span-7 bg-emerald-950/40 border border-emerald-800/40 rounded-3xl p-4 md:p-6 backdrop-blur-xl shadow-2xl relative">
+          
+          <div class="relative rounded-2xl overflow-hidden bg-black aspect-video group shadow-inner border border-emerald-900/40">
+            <video 
+              #mainVideoPlayer
+              [src]="currentClip.src"
+              [muted]="isMuted"
+              autoplay
+              loop
+              playsinline
+              (ended)="onVideoEnded()"
+              class="w-full h-full object-cover">
+            </video>
+
+            <!-- Video Top Header Bar -->
+            <div class="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-black/80 via-black/40 to-transparent flex items-center justify-between z-20">
+              <div class="flex items-center gap-2">
+                <span class="px-3 py-1 bg-emerald-600 text-white font-bold text-xs rounded-full uppercase tracking-wider shadow">
+                  {{ currentClip.tag }}
+                </span>
+                <span class="text-white text-xs font-medium backdrop-blur-md px-2.5 py-1 rounded-full bg-black/40 border border-white/10">
+                  ⏱️ {{ currentClip.duration }}
+                </span>
+              </div>
+
+              <!-- Fullscreen Modal Button -->
+              <button 
+                (click)="openVideoModal(activeClipIndex)"
+                class="px-3 py-1 bg-black/60 hover:bg-emerald-600 text-white text-xs font-medium rounded-full border border-white/20 transition-all flex items-center gap-1.5 cursor-pointer">
+                <span>🔍 Theater Mode</span>
+              </button>
+            </div>
+
+            <!-- Video Bottom Overlay Controls -->
+            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-20 flex items-center justify-between">
+              <div>
+                <p class="text-white font-bold text-base flex items-center gap-2">
+                  <span>{{ currentClip.icon }}</span>
+                  <span>{{ currentClip.title }}</span>
+                </p>
+                <p class="text-emerald-300/80 text-xs hidden sm:block mt-0.5 line-clamp-1">
+                  {{ currentClip.desc }}
+                </p>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <button 
+                  (click)="togglePlayPause()" 
+                  class="w-10 h-10 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center font-bold text-sm transition-all shadow-lg cursor-pointer">
+                  {{ isPlaying ? '⏸' : '▶' }}
+                </button>
+                <button 
+                  (click)="toggleMute()" 
+                  class="w-10 h-10 rounded-full bg-black/60 hover:bg-emerald-900/60 border border-emerald-700/40 text-emerald-300 flex items-center justify-center text-sm transition-all cursor-pointer">
+                  {{ isMuted ? '🔇' : '🔊' }}
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Video Details Summary Footer -->
+          <div class="mt-4 p-4 rounded-2xl bg-emerald-900/20 border border-emerald-800/30 flex items-center justify-between flex-wrap gap-4">
+            <div>
+              <span class="text-xs uppercase font-semibold tracking-wider text-emerald-400">Currently Playing</span>
+              <h3 class="text-white text-lg font-bold">{{ currentClip.subtitle }}</h3>
+            </div>
+            <button 
+              (click)="openVideoModal(activeClipIndex)"
+              class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-lg cursor-pointer">
+              Launch Fullscreen Theater ↗
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Right: Video Clips Selector List (5 Cols) -->
+        <div class="lg:col-span-5 space-y-3">
+          <div class="flex items-center justify-between px-2 mb-2">
+            <h3 class="text-lg font-bold text-white flex items-center gap-2">
+              <span>🎞️</span> Select Video Chapter
+            </h3>
+            <span class="text-xs text-emerald-400 font-semibold bg-emerald-950/80 px-2.5 py-1 rounded-full border border-emerald-800/50">
+              7 Clips Available
+            </span>
+          </div>
+
+          <!-- Video Clip List Items -->
+          <div 
+            *for="let clip of clips; let i = index"
+            (click)="selectClip(i)"
+            [ngClass]="{
+              'bg-gradient-to-r from-emerald-900/60 to-teal-900/40 border-emerald-400 shadow-xl scale-[1.02]': activeClipIndex === i,
+              'bg-emerald-950/30 border-emerald-900/40 hover:bg-emerald-900/30 hover:border-emerald-700/50': activeClipIndex !== i
+            }"
+            class="p-4 rounded-2xl border transition-all duration-200 cursor-pointer flex items-center gap-4 group">
+            
+            <div 
+              [ngClass]="activeClipIndex === i ? 'bg-emerald-500 text-white' : 'bg-emerald-900/40 text-emerald-300 group-hover:bg-emerald-700/50 group-hover:text-white'"
+              class="w-12 h-12 rounded-xl flex items-center justify-center text-xl flex-shrink-0 transition-all font-bold shadow-inner">
+              {{ clip.icon }}
+            </div>
+
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2">
+                <span 
+                  [ngClass]="activeClipIndex === i ? 'bg-emerald-400 text-emerald-950 font-bold' : 'bg-emerald-900/50 text-emerald-300'"
+                  class="text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider">
+                  {{ clip.tag }}
+                </span>
+                <span class="text-[11px] text-emerald-400/80 font-mono">
+                  ⏱️ {{ clip.duration }}
+                </span>
+              </div>
+              <h4 
+                [ngClass]="activeClipIndex === i ? 'text-white' : 'text-emerald-100 group-hover:text-emerald-300'"
+                class="text-sm font-bold mt-1 tracking-tight truncate">
+                {{ clip.title }}
+              </h4>
+              <p class="text-xs text-emerald-300/60 truncate mt-0.5">
+                {{ clip.subtitle }}
+              </p>
+            </div>
+
+            <div class="text-emerald-400 font-bold text-base flex-shrink-0">
+              <span *ngIf="activeClipIndex === i" class="animate-pulse text-emerald-400">▶ Now Playing</span>
+              <span *ngIf="activeClipIndex !== i" class="opacity-0 group-hover:opacity-100 transition-opacity">Play →</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
   </section>
 
-  <!-- STATS BAR -->
-  <div class="flex justify-center gap-12 px-6 py-8 border-t border-b border-green-900/20 flex-wrap bg-[#0a0f0a]">
-    <div class="text-center">
-      <div class="text-3xl font-bold text-green-400">12K+</div>
-      <div class="text-xs text-green-700 uppercase tracking-widest mt-1">Pickups Completed</div>
-    </div>
-    <div class="text-center">
-      <div class="text-3xl font-bold text-green-400">3.4T</div>
-      <div class="text-xs text-green-700 uppercase tracking-widest mt-1">Waste Recycled</div>
-    </div>
-    <div class="text-center">
-      <div class="text-3xl font-bold text-green-400">800+</div>
-      <div class="text-xs text-green-700 uppercase tracking-widest mt-1">Active Volunteers</div>
-    </div>
-    <div class="text-center">
-      <div class="text-3xl font-bold text-green-400">50+</div>
-      <div class="text-xs text-green-700 uppercase tracking-widest mt-1">Cities Covered</div>
+  <!-- KEY IMPACT STATS -->
+  <div class="bg-[#09130a] py-12 border-b border-emerald-900/30 relative">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div class="p-6 rounded-2xl bg-emerald-950/30 border border-emerald-900/40 hover:border-emerald-700/50 transition-all">
+        <div class="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-200">12K+</div>
+        <div class="text-xs text-emerald-400 uppercase tracking-widest font-semibold mt-2">Pickups Completed</div>
+      </div>
+      <div class="p-6 rounded-2xl bg-emerald-950/30 border border-emerald-900/40 hover:border-emerald-700/50 transition-all">
+        <div class="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-cyan-200">3.4 Tons</div>
+        <div class="text-xs text-emerald-400 uppercase tracking-widest font-semibold mt-2">Waste Recycled</div>
+      </div>
+      <div class="p-6 rounded-2xl bg-emerald-950/30 border border-emerald-900/40 hover:border-emerald-700/50 transition-all">
+        <div class="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-green-300">800+</div>
+        <div class="text-xs text-emerald-400 uppercase tracking-widest font-semibold mt-2">Active Volunteers</div>
+      </div>
+      <div class="p-6 rounded-2xl bg-emerald-950/30 border border-emerald-900/40 hover:border-emerald-700/50 transition-all">
+        <div class="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-teal-300">50+</div>
+        <div class="text-xs text-emerald-400 uppercase tracking-widest font-semibold mt-2">Smart Cities</div>
+      </div>
     </div>
   </div>
 
   <!-- HOW IT WORKS -->
-  <section class="px-8 py-24 bg-[#0a0f0a]">
-    <p class="text-green-500 text-xs uppercase tracking-widest font-medium mb-3">How it works</p>
-    <h2 class="text-4xl font-bold text-green-50 tracking-tight mb-14 max-w-md leading-snug">
-      From Request to Recycled in 4 Steps
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-
-      <div class="p-7 rounded-2xl bg-white/[0.02] border border-green-900/30 hover:bg-green-900/10 hover:-translate-y-1 transition-all">
-        <div class="text-5xl font-extrabold text-green-900 mb-4 leading-none">01</div>
-        <div class="text-2xl mb-3">📋</div>
-        <h4 class="text-green-300 font-semibold text-base mb-2">Schedule a Pickup</h4>
-        <p class="text-green-700 text-sm leading-relaxed">Fill out a simple form with your waste type, location, and preferred time.</p>
-      </div>
-
-      <div class="p-7 rounded-2xl bg-white/[0.02] border border-green-900/30 hover:bg-green-900/10 hover:-translate-y-1 transition-all">
-        <div class="text-5xl font-extrabold text-green-900 mb-4 leading-none">02</div>
-        <div class="text-2xl mb-3">🔔</div>
-        <h4 class="text-green-300 font-semibold text-base mb-2">Volunteer is Notified</h4>
-        <p class="text-green-700 text-sm leading-relaxed">Nearby volunteers see your request and can accept it instantly.</p>
-      </div>
-
-      <div class="p-7 rounded-2xl bg-white/[0.02] border border-green-900/30 hover:bg-green-900/10 hover:-translate-y-1 transition-all">
-        <div class="text-5xl font-extrabold text-green-900 mb-4 leading-none">03</div>
-        <div class="text-2xl mb-3">🚛</div>
-        <h4 class="text-green-300 font-semibold text-base mb-2">Waste Gets Collected</h4>
-        <p class="text-green-700 text-sm leading-relaxed">Your assigned volunteer arrives and collects the waste responsibly.</p>
-      </div>
-
-      <div class="p-7 rounded-2xl bg-white/[0.02] border border-green-900/30 hover:bg-green-900/10 hover:-translate-y-1 transition-all">
-        <div class="text-5xl font-extrabold text-green-900 mb-4 leading-none">04</div>
-        <div class="text-2xl mb-3">♻️</div>
-        <h4 class="text-green-300 font-semibold text-base mb-2">Track Your Impact</h4>
-        <p class="text-green-700 text-sm leading-relaxed">See your recycling stats and environmental contribution in real-time.</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section class="px-8 py-24 bg-[#071a07] border-t border-b border-green-900/10">
-    <p class="text-green-500 text-xs uppercase tracking-widest font-medium mb-3">Features</p>
-    <h2 class="text-4xl font-bold text-green-50 tracking-tight mb-14 max-w-md leading-snug">
-      Everything You Need to Go Green
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-
-      <div class="flex gap-4 p-5 rounded-2xl bg-white/[0.02] border border-green-900/20 hover:bg-green-900/10 hover:border-green-700/30 transition-all">
-        <div class="w-11 h-11 min-w-[44px] bg-green-900/40 rounded-xl flex items-center justify-center text-xl">📅</div>
-        <div>
-          <h4 class="text-green-300 font-semibold text-sm mb-1">Easy Scheduling</h4>
-          <p class="text-green-700 text-xs leading-relaxed">Book a pickup in under 60 seconds with our streamlined form.</p>
-        </div>
-      </div>
-
-      <div class="flex gap-4 p-5 rounded-2xl bg-white/[0.02] border border-green-900/20 hover:bg-green-900/10 hover:border-green-700/30 transition-all">
-        <div class="w-11 h-11 min-w-[44px] bg-green-900/40 rounded-xl flex items-center justify-center text-xl">📍</div>
-        <div>
-          <h4 class="text-green-300 font-semibold text-sm mb-1">Location-Based Matching</h4>
-          <p class="text-green-700 text-xs leading-relaxed">We match your request with the nearest available volunteer automatically.</p>
-        </div>
-      </div>
-
-      <div class="flex gap-4 p-5 rounded-2xl bg-white/[0.02] border border-green-900/20 hover:bg-green-900/10 hover:border-green-700/30 transition-all">
-        <div class="w-11 h-11 min-w-[44px] bg-green-900/40 rounded-xl flex items-center justify-center text-xl">💬</div>
-        <div>
-          <h4 class="text-green-300 font-semibold text-sm mb-1">Built-in Messaging</h4>
-          <p class="text-green-700 text-xs leading-relaxed">Chat directly with your volunteer to coordinate pickup details.</p>
-        </div>
-      </div>
-
-      <div class="flex gap-4 p-5 rounded-2xl bg-white/[0.02] border border-green-900/20 hover:bg-green-900/10 hover:border-green-700/30 transition-all">
-        <div class="w-11 h-11 min-w-[44px] bg-green-900/40 rounded-xl flex items-center justify-center text-xl">📊</div>
-        <div>
-          <h4 class="text-green-300 font-semibold text-sm mb-1">Impact Dashboard</h4>
-          <p class="text-green-700 text-xs leading-relaxed">Track plastic, organic, e-waste and more with beautiful stats.</p>
-        </div>
-      </div>
-
-      <div class="flex gap-4 p-5 rounded-2xl bg-white/[0.02] border border-green-900/20 hover:bg-green-900/10 hover:border-green-700/30 transition-all">
-        <div class="w-11 h-11 min-w-[44px] bg-green-900/40 rounded-xl flex items-center justify-center text-xl">🔒</div>
-        <div>
-          <h4 class="text-green-300 font-semibold text-sm mb-1">Secure & Role-Based</h4>
-          <p class="text-green-700 text-xs leading-relaxed">JWT authentication with separate access for citizens, volunteers & admins.</p>
-        </div>
-      </div>
-
-      <div class="flex gap-4 p-5 rounded-2xl bg-white/[0.02] border border-green-900/20 hover:bg-green-900/10 hover:border-green-700/30 transition-all">
-        <div class="w-11 h-11 min-w-[44px] bg-green-900/40 rounded-xl flex items-center justify-center text-xl">📥</div>
-        <div>
-          <h4 class="text-green-300 font-semibold text-sm mb-1">Admin Reports</h4>
-          <p class="text-green-700 text-xs leading-relaxed">Generate and download CSV/PDF reports on all platform activity.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ROLES -->
-  <section class="px-8 py-24 bg-[#0a0f0a]">
-    <p class="text-green-500 text-xs uppercase tracking-widest font-medium mb-3">User Roles</p>
-    <h2 class="text-4xl font-bold text-green-50 tracking-tight mb-14 max-w-md leading-snug">
-      Built for Everyone in the Community
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-
-      <!-- User -->
-      <div class="p-7 rounded-2xl border border-teal-900/40 bg-white/[0.02] hover:-translate-y-1 transition-all">
-        <span class="inline-block px-3 py-1 rounded-full bg-teal-900/30 text-teal-400 text-xs font-medium uppercase tracking-wider mb-5">Citizen</span>
-        <h3 class="text-green-50 text-xl font-bold mb-3">User</h3>
-        <p class="text-green-700 text-sm leading-relaxed mb-5">Schedule pickups and monitor your personal recycling impact with ease.</p>
-        <ul class="space-y-2">
-          <li class="flex items-center gap-2 text-green-500 text-sm"><span class="w-1.5 h-1.5 bg-teal-500 rounded-full flex-shrink-0"></span>Schedule waste pickups</li>
-          <li class="flex items-center gap-2 text-green-500 text-sm"><span class="w-1.5 h-1.5 bg-teal-500 rounded-full flex-shrink-0"></span>Track pickup status</li>
-          <li class="flex items-center gap-2 text-green-500 text-sm"><span class="w-1.5 h-1.5 bg-teal-500 rounded-full flex-shrink-0"></span>View recycling impact</li>
-          <li class="flex items-center gap-2 text-green-500 text-sm"><span class="w-1.5 h-1.5 bg-teal-500 rounded-full flex-shrink-0"></span>Message your volunteer</li>
-        </ul>
-      </div>
-
-      <!-- Volunteer -->
-      <div class="p-7 rounded-2xl border border-green-800/40 bg-white/[0.02] hover:-translate-y-1 transition-all">
-        <span class="inline-block px-3 py-1 rounded-full bg-green-900/40 text-green-400 text-xs font-medium uppercase tracking-wider mb-5">Pickup Agent</span>
-        <h3 class="text-green-50 text-xl font-bold mb-3">Volunteer</h3>
-        <p class="text-green-700 text-sm leading-relaxed mb-5">Browse available opportunities and help your community go greener.</p>
-        <ul class="space-y-2">
-          <li class="flex items-center gap-2 text-green-500 text-sm"><span class="w-1.5 h-1.5 bg-green-500 rounded-full flex-shrink-0"></span>View open pickup requests</li>
-          <li class="flex items-center gap-2 text-green-500 text-sm"><span class="w-1.5 h-1.5 bg-green-500 rounded-full flex-shrink-0"></span>Accept opportunities</li>
-          <li class="flex items-center gap-2 text-green-500 text-sm"><span class="w-1.5 h-1.5 bg-green-500 rounded-full flex-shrink-0"></span>Update pickup status</li>
-          <li class="flex items-center gap-2 text-green-500 text-sm"><span class="w-1.5 h-1.5 bg-green-500 rounded-full flex-shrink-0"></span>Communicate with users</li>
-        </ul>
-      </div>
-
-      <!-- Admin -->
-      <div class="p-7 rounded-2xl border border-yellow-900/40 bg-white/[0.02] hover:-translate-y-1 transition-all">
-        <span class="inline-block px-3 py-1 rounded-full bg-yellow-900/20 text-yellow-500 text-xs font-medium uppercase tracking-wider mb-5">Administrator</span>
-        <h3 class="text-green-50 text-xl font-bold mb-3">Admin</h3>
-        <p class="text-green-700 text-sm leading-relaxed mb-5">Oversee the entire platform, manage users and generate detailed reports.</p>
-        <ul class="space-y-2">
-          <li class="flex items-center gap-2 text-green-500 text-sm"><span class="w-1.5 h-1.5 bg-yellow-500 rounded-full flex-shrink-0"></span>Monitor all activity</li>
-          <li class="flex items-center gap-2 text-green-500 text-sm"><span class="w-1.5 h-1.5 bg-yellow-500 rounded-full flex-shrink-0"></span>Manage users & volunteers</li>
-          <li class="flex items-center gap-2 text-green-500 text-sm"><span class="w-1.5 h-1.5 bg-yellow-500 rounded-full flex-shrink-0"></span>Generate PDF/CSV reports</li>
-          <li class="flex items-center gap-2 text-green-500 text-sm"><span class="w-1.5 h-1.5 bg-yellow-500 rounded-full flex-shrink-0"></span>Handle platform operations</li>
-        </ul>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="px-8 py-24 bg-[#0a0f0a] text-center">
-    <div class="max-w-2xl mx-auto bg-green-900/10 border border-green-800/30 rounded-3xl px-8 py-20 relative overflow-hidden">
-      <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-40 bg-green-700/20 rounded-full blur-3xl pointer-events-none"></div>
-      <h2 class="relative z-10 text-4xl md:text-5xl font-extrabold text-green-50 tracking-tight mb-4">
-        Ready to Make a Difference?
+  <section class="px-6 md:px-12 py-24 bg-[#070b07]">
+    <div class="max-w-7xl mx-auto">
+      <p class="text-emerald-400 text-xs uppercase tracking-widest font-bold mb-3">Simple 4-Step Process</p>
+      <h2 class="text-4xl font-extrabold text-white tracking-tight mb-16 max-w-lg leading-snug">
+        From Request to Recycled in Minutes
       </h2>
-      <p class="relative z-10 text-green-500 text-base mb-10 max-w-md mx-auto leading-relaxed">
-        Join thousands of citizens and volunteers already using WasteZero to build cleaner communities.
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <div (click)="selectClip(1); openVideoModal(1)"
+             class="p-8 rounded-3xl bg-emerald-950/20 border border-emerald-900/40 hover:bg-emerald-900/20 hover:border-emerald-500/50 hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer">
+          <div class="flex items-center justify-between mb-6">
+            <span class="text-5xl font-black text-emerald-900/80 group-hover:text-emerald-600/60 transition-colors">01</span>
+            <span class="text-3xl p-3 bg-emerald-900/40 rounded-2xl">📋</span>
+          </div>
+          <h4 class="text-white font-bold text-lg mb-2 group-hover:text-emerald-300 transition-colors">Schedule a Pickup</h4>
+          <p class="text-emerald-300/70 text-sm leading-relaxed mb-4">Choose waste type, location, and preferred time window.</p>
+          <span class="text-xs font-semibold text-emerald-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            ▶ Watch 10s Clip →
+          </span>
+        </div>
+
+        <div (click)="selectClip(2); openVideoModal(2)"
+             class="p-8 rounded-3xl bg-emerald-950/20 border border-emerald-900/40 hover:bg-emerald-900/20 hover:border-emerald-500/50 hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer">
+          <div class="flex items-center justify-between mb-6">
+            <span class="text-5xl font-black text-emerald-900/80 group-hover:text-emerald-600/60 transition-colors">02</span>
+            <span class="text-3xl p-3 bg-emerald-900/40 rounded-2xl">🔔</span>
+          </div>
+          <h4 class="text-white font-bold text-lg mb-2 group-hover:text-emerald-300 transition-colors">Volunteer Dispatched</h4>
+          <p class="text-emerald-300/70 text-sm leading-relaxed mb-4">Nearby drivers accept your request instantly and start route.</p>
+          <span class="text-xs font-semibold text-emerald-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            ▶ Watch 10s Clip →
+          </span>
+        </div>
+
+        <div (click)="selectClip(3); openVideoModal(3)"
+             class="p-8 rounded-3xl bg-emerald-950/20 border border-emerald-900/40 hover:bg-emerald-900/20 hover:border-emerald-500/50 hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer">
+          <div class="flex items-center justify-between mb-6">
+            <span class="text-5xl font-black text-emerald-900/80 group-hover:text-emerald-600/60 transition-colors">03</span>
+            <span class="text-3xl p-3 bg-emerald-900/40 rounded-2xl">🚛</span>
+          </div>
+          <h4 class="text-white font-bold text-lg mb-2 group-hover:text-emerald-300 transition-colors">Waste Collection</h4>
+          <p class="text-emerald-300/70 text-sm leading-relaxed mb-4">Assigned agent collects and verifies waste categories on site.</p>
+          <span class="text-xs font-semibold text-emerald-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            ▶ Watch 10s Clip →
+          </span>
+        </div>
+
+        <div (click)="selectClip(4); openVideoModal(4)"
+             class="p-8 rounded-3xl bg-emerald-950/20 border border-emerald-900/40 hover:bg-emerald-900/20 hover:border-emerald-500/50 hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer">
+          <div class="flex items-center justify-between mb-6">
+            <span class="text-5xl font-black text-emerald-900/80 group-hover:text-emerald-600/60 transition-colors">04</span>
+            <span class="text-3xl p-3 bg-emerald-900/40 rounded-2xl">♻️</span>
+          </div>
+          <h4 class="text-white font-bold text-lg mb-2 group-hover:text-emerald-300 transition-colors">Eco Recycling & Stats</h4>
+          <p class="text-emerald-300/70 text-sm leading-relaxed mb-4">Materials are recycled and added to your environmental impact score.</p>
+          <span class="text-xs font-semibold text-emerald-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            ▶ Watch 10s Clip →
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ROLES SECTION -->
+  <section class="px-6 md:px-12 py-24 bg-[#09130a] border-t border-b border-emerald-900/30">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-emerald-400 text-xs uppercase tracking-widest font-bold">Community Ecosystem</span>
+        <h2 class="text-4xl font-extrabold text-white tracking-tight mt-2">Tailored for Every Stakeholder</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Citizen -->
+        <div class="p-8 rounded-3xl bg-emerald-950/30 border border-emerald-800/40 hover:border-emerald-500/60 hover:-translate-y-1 transition-all">
+          <span class="px-3.5 py-1 rounded-full bg-emerald-900/60 text-emerald-300 text-xs font-bold uppercase tracking-wider inline-block mb-6">Citizens</span>
+          <h3 class="text-2xl font-bold text-white mb-3">Schedule & Track</h3>
+          <p class="text-emerald-200/70 text-sm mb-6 leading-relaxed">Easily request pickups, chat with assigned volunteers, and monitor personal recycling stats.</p>
+          <ul class="space-y-3">
+            <li class="flex items-center gap-3 text-emerald-300 text-xs font-medium"><span class="w-2 h-2 bg-emerald-400 rounded-full"></span>Instant Waste Booking</li>
+            <li class="flex items-center gap-3 text-emerald-300 text-xs font-medium"><span class="w-2 h-2 bg-emerald-400 rounded-full"></span>Real-time Status Updates</li>
+            <li class="flex items-center gap-3 text-emerald-300 text-xs font-medium"><span class="w-2 h-2 bg-emerald-400 rounded-full"></span>Personalized Impact Cards</li>
+          </ul>
+        </div>
+
+        <!-- Volunteer -->
+        <div class="p-8 rounded-3xl bg-teal-950/30 border border-teal-800/40 hover:border-teal-500/60 hover:-translate-y-1 transition-all">
+          <span class="px-3.5 py-1 rounded-full bg-teal-900/60 text-teal-300 text-xs font-bold uppercase tracking-wider inline-block mb-6">Pickup Agents</span>
+          <h3 class="text-2xl font-bold text-white mb-3">Accept & Route</h3>
+          <p class="text-teal-200/70 text-sm mb-6 leading-relaxed">Access pickup opportunities, optimize collection routes, and earn volunteer badges.</p>
+          <ul class="space-y-3">
+            <li class="flex items-center gap-3 text-teal-300 text-xs font-medium"><span class="w-2 h-2 bg-teal-400 rounded-full"></span>Geolocation Request Map</li>
+            <li class="flex items-center gap-3 text-teal-300 text-xs font-medium"><span class="w-2 h-2 bg-teal-400 rounded-full"></span>One-Click Acceptance</li>
+            <li class="flex items-center gap-3 text-teal-300 text-xs font-medium"><span class="w-2 h-2 bg-teal-400 rounded-full"></span>Direct Citizen Chat</li>
+          </ul>
+        </div>
+
+        <!-- Admin -->
+        <div class="p-8 rounded-3xl bg-amber-950/30 border border-amber-800/40 hover:border-amber-500/60 hover:-translate-y-1 transition-all">
+          <span class="px-3.5 py-1 rounded-full bg-amber-900/60 text-amber-300 text-xs font-bold uppercase tracking-wider inline-block mb-6">Administrators</span>
+          <h3 class="text-2xl font-bold text-white mb-3">Manage & Report</h3>
+          <p class="text-amber-200/70 text-sm mb-6 leading-relaxed">Control user approvals, oversee citywide operations, and export PDF/CSV reports.</p>
+          <ul class="space-y-3">
+            <li class="flex items-center gap-3 text-amber-300 text-xs font-medium"><span class="w-2 h-2 bg-amber-400 rounded-full"></span>Full User Governance</li>
+            <li class="flex items-center gap-3 text-amber-300 text-xs font-medium"><span class="w-2 h-2 bg-amber-400 rounded-full"></span>Automated PDF/CSV Export</li>
+            <li class="flex items-center gap-3 text-amber-300 text-xs font-medium"><span class="w-2 h-2 bg-amber-400 rounded-full"></span>Systemwide Telemetry</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FOOTER HERO -->
+  <section class="px-6 md:px-12 py-24 bg-[#070b07] text-center relative overflow-hidden">
+    <div class="max-w-4xl mx-auto bg-gradient-to-r from-emerald-950/80 via-teal-950/60 to-emerald-950/80 border border-emerald-800/50 rounded-3xl p-10 md:p-16 relative shadow-2xl">
+      <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-48 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <h2 class="relative z-10 text-4xl md:text-5xl font-black text-white tracking-tight mb-6">
+        Ready to Build Greener Cities?
+      </h2>
+      <p class="relative z-10 text-emerald-200/80 text-base md:text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+        Join citizens and volunteers taking active steps towards zero-waste urban communities.
       </p>
-      <div class="relative z-10 flex gap-3 justify-center flex-wrap">
+
+      <div class="relative z-10 flex gap-4 justify-center flex-wrap">
         <a routerLink="/register"
-           class="px-8 py-3 rounded-full bg-green-700 text-green-50 font-medium hover:bg-green-800 hover:-translate-y-0.5 transition-all no-underline">
-          Create Free Account
+           class="px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold hover:scale-105 transition-all shadow-xl no-underline">
+          Create Account
         </a>
         <a routerLink="/login"
-           class="px-8 py-3 rounded-full border border-green-700/40 text-green-300 font-medium hover:bg-green-900/30 transition-all no-underline">
+           class="px-8 py-4 rounded-2xl bg-emerald-950/80 border border-emerald-700/50 text-emerald-300 font-bold hover:bg-emerald-900/40 transition-all no-underline">
           Sign In
         </a>
       </div>
@@ -242,12 +420,70 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="px-8 py-6 border-t border-green-900/20 flex justify-between items-center flex-wrap gap-4 bg-[#0a0f0a]">
-    <a routerLink="/" class="flex items-center gap-2 font-bold text-lg text-green-300 no-underline">
-      <span class="w-2 h-2 bg-green-400 rounded-full inline-block animate-pulse"></span>
-      WasteZero
-    </a>
-    <p class="text-green-800 text-sm">© 2025 WasteZero. All rights reserved.</p>
+  <footer class="px-6 md:px-12 py-8 border-t border-emerald-900/30 flex flex-wrap justify-between items-center gap-4 bg-[#050805] text-xs text-emerald-400/60">
+    <div class="flex items-center gap-3">
+      <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
+      <span class="font-bold text-emerald-300 text-sm">WasteZero</span>
+      <span>— Smart Waste Pickup & Recycling Platform</span>
+    </div>
+    <div>
+      © 2026 WasteZero Platform. All rights reserved.
+    </div>
   </footer>
+
+  <!-- FULLSCREEN VIDEO THEATER LIGHTBOX MODAL -->
+  <div *ngIf="showVideoModal" 
+       class="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl flex items-center justify-center p-4 md:p-8 animate-fade">
+    
+    <div class="relative w-full max-w-5xl bg-[#09130a] border border-emerald-700/50 rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[95vh]">
+
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between px-6 py-4 bg-emerald-950/90 border-b border-emerald-800/40">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">{{ currentModalClip.icon }}</span>
+          <div>
+            <h3 class="text-white font-bold text-base md:text-lg leading-tight">
+              {{ currentModalClip.title }}
+            </h3>
+            <p class="text-emerald-400 text-xs">{{ currentModalClip.subtitle }}</p>
+          </div>
+        </div>
+
+        <button 
+          (click)="closeVideoModal()"
+          class="w-10 h-10 rounded-full bg-emerald-900/50 hover:bg-red-900/60 text-white font-bold flex items-center justify-center border border-emerald-700/40 transition-all cursor-pointer text-lg">
+          ✕
+        </button>
+      </div>
+
+      <!-- Modal Video Container -->
+      <div class="relative bg-black flex-1 flex items-center justify-center min-h-[300px] md:min-h-[450px]">
+        <video 
+          #modalVideoPlayer
+          [src]="currentModalClip.src"
+          controls
+          autoplay
+          playsinline
+          class="w-full max-h-[65vh] object-contain">
+        </video>
+      </div>
+
+      <!-- Modal Footer Clips Switcher Bar -->
+      <div class="p-4 bg-emerald-950/80 border-t border-emerald-800/40 overflow-x-auto">
+        <div class="flex items-center gap-2 min-w-max">
+          <button 
+            *ngFor="let clip of clips; let idx = index"
+            (click)="switchModalClip(idx)"
+            [ngClass]="selectedModalClipIndex === idx ? 'bg-emerald-500 text-white font-bold' : 'bg-emerald-900/40 text-emerald-300 hover:bg-emerald-800/50'"
+            class="px-3.5 py-2 rounded-xl text-xs flex items-center gap-2 transition-all cursor-pointer border border-emerald-700/30">
+            <span>{{ clip.icon }}</span>
+            <span>{{ clip.tag }}</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
 
 </div>

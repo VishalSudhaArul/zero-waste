@@ -27,11 +27,20 @@ export class Login {
       password: ['', Validators.required]
     });
 
-    // Auto redirect if already logged in
     const token = localStorage.getItem('token');
     const role = localStorage.getItem('role');
     if (token && role) {
       this.redirectByRole(role);
+    }
+  }
+
+  fillDemo(role: string): void {
+    if (role === 'user') {
+      this.loginForm.patchValue({ email: 'user@zero.com', password: 'password123' });
+    } else if (role === 'volunteer') {
+      this.loginForm.patchValue({ email: 'volunteer@zero.com', password: 'password123' });
+    } else if (role === 'admin') {
+      this.loginForm.patchValue({ email: 'admin@zero.com', password: 'password123' });
     }
   }
 
@@ -48,7 +57,6 @@ export class Login {
       next: (res: any) => {
         this.isLoading = false;
 
-        // Store all user data
         localStorage.setItem('token',     res.token);
         localStorage.setItem('role',      res.role);
         localStorage.setItem('name',      res.name);
@@ -62,7 +70,7 @@ export class Login {
       },
       error: (err) => {
         this.isLoading = false;
-        this.errorMessage = err?.error?.message || 'Login failed. Please try again.';
+        this.errorMessage = err?.error?.message || 'Login failed. Please verify credentials.';
       }
     });
   }

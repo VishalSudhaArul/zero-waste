@@ -1,8 +1,10 @@
 {
+  "buildCommand": "cd wastezero-frontend && npm install && npm run build",
+  "outputDirectory": "wastezero-frontend/dist/wastezero-frontend/browser",
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/"
+      "destination": "/index.html"
     }
   ]
 }
